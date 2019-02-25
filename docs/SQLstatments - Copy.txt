@@ -1,0 +1,129 @@
+CREATE DATABASE hotelReservation;
+======================================
+CREATE TABLE hotel(
+    id integer NOT NULL AUTO_INCREMENT,
+    name varchar(255),
+    email varchar(255) NOT NULL UNIQUE,
+    password varchar(255),
+    location varchar(255),
+    stars integer,
+    rating float,
+    moneyOwed float DEFAULT '0',
+	PRIMARY KEY(id)
+	);
+   
+CREATE TABLE waitingHotel(
+    id integer NOT NULL AUTO_INCREMENT,
+    name varchar(255),
+    email varchar(255) NOT NULL UNIQUE,
+    password varchar(255),
+    location varchar(255),
+    stars integer,
+    rating float,
+    moneyOwed float DEFAULT '0',
+	PRIMARY KEY(id)
+	);
+    
+CREATE TABLE suspendedHotel(
+    id integer NOT NULL AUTO_INCREMENT,
+    name varchar(255),
+    email varchar(255) NOT NULL UNIQUE,
+    password varchar(255),
+    location varchar(255),
+    stars integer,
+    rating float,
+    moneyOwed float DEFAULT '0',
+	PRIMARY KEY(id)
+	);
+    
+CREATE TABLE room(
+    id integer NOT NULL AUTO_INCREMENT,
+    hotelId integer,
+    type varchar(255),
+    price integer DEFAULT '0',
+    imageUrl varchar(255),
+    PRIMARY KEY(id),
+    FOREIGN KEY(hotelId)
+    REFERENCES hotel(id) ON DELETE CASCADE
+    );
+    
+CREATE TABLE waitingRoom(
+    id integer NOT NULL AUTO_INCREMENT,
+    hotelId integer,
+    type varchar(255),
+    price integer DEFAULT '0',
+    imageUrl varchar(255),
+    PRIMARY KEY(id),
+    FOREIGN KEY(hotelId)
+    REFERENCES waitinghotel(id) ON DELETE CASCADE
+    );
+    
+CREATE TABLE client(
+    id integer NOT NULL AUTO_INCREMENT,
+    name varchar(255),
+    email varchar(255) NOT NULL UNIQUE,
+    password varchar(255),
+    PRIMARY KEY(id)
+    );
+    
+CREATE TABLE suspendedClient(
+    id integer NOT NULL AUTO_INCREMENT,
+    name varchar(255),
+    email varchar(255) NOT NULL UNIQUE,
+    password varchar(255),
+    suspensionDate DATE,
+    PRIMARY KEY(id)
+    );
+    
+CREATE TABLE rating(
+    hotelId integer NOT NULL,
+    clientId integer NOT NULL,
+    rating float,
+    PRIMARY KEY (hotelId,clientID),
+    FOREIGN KEY (hotelId) REFERENCES hotel(id) ON DELETE CASCADE,
+    FOREIGN KEY (clientId) REFERENCES client(id) ON DELETE CASCADE
+    );
+    
+CREATE TABLE reservation(
+    roomId integer NOT NULL,
+    clientId integer NOT NULL,
+    checkInDate DATE,
+    checkOutDate DATE,
+    checkIn integer DEFAULT '-1',
+    price float,
+    PRIMARY KEY (roomId,clientId,checkInDate),
+    FOREIGN KEY (roomId) REFERENCES room(id) ON DELETE CASCADE,
+    FOREIGN KEY (clientId) REFERENCES client(id) ON DELETE CASCADE
+    );
+
+CREATE TABLE waitingReservation(
+    roomId integer NOT NULL,
+    clientId integer NOT NULL,
+    checkInDate DATE,
+    checkOutDate DATE,
+    checkIn integer DEFAULT '-1',
+    price float,
+    PRIMARY KEY (roomId,clientId),
+    FOREIGN KEY (roomId) REFERENCES room(id) ON DELETE CASCADE,
+    FOREIGN KEY (clientId) REFERENCES client(id) ON DELETE CASCADE
+    );
+
+CREATE TABLE facilities(
+    hotelId integer NOT NULL,
+    spa varchar(255),
+    beach varchar(255),
+    swimmingPool varchar(255),
+    GYM varchar(255),
+    FOREIGN KEY (hotelId) REFERENCES hotel(id) ON DELETE CASCADE
+    );
+
+CREATE TABLE waitingfacilities(
+    hotelId integer NOT NULL,
+    spa varchar(255),
+    beach varchar(255),
+    swimmingPool varchar(255),
+    GYM varchar(255),
+    FOREIGN KEY (hotelId) REFERENCES waitinghotel(id) ON DELETE CASCADE
+    );
+    
+    

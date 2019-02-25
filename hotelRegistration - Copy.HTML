@@ -1,0 +1,85 @@
+<<!DOCTYPE html>
+    <html>
+
+    <head>
+        <meta charset="utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>Hotel Registration</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" type="text/css" media="screen" href="main.css" />
+        <script src="main.js"></script>
+    </head>
+
+    <?php
+    session_start();
+    $title = "Hotel registration";
+    if ( isset($_SESSION['hotelEmail']))
+    ?>
+
+        <body>
+
+            <form method="POST" action="hotelRegistration.php">
+                <header>
+                    <h1>Hotel registration</h1>
+                </header>
+                <hr>
+                <div>
+                    <label for="hotelName"><b>Hotel name</b></label><br>
+                    <input type="text" placeholder="hotelName" name="hotelName" required><br>
+                </div>
+
+                <div>
+                    <label for="hotelEmail"><b>Hotel email</b></label><br>
+                    <input type="text" placeholder="hotel email" name="hotelEmail" required><br>
+                </div>
+
+                <div>
+                    <label for="hotelPassword"><b>Password</b></label><br>
+                    <input type="text" placeholder="********" name="hotelPassword" required><br>
+                </div>
+
+                <div>
+                    <label for="confirmPassword"><b>Confirm Password</b></label><br>
+                    <input type="text" placeholder="********" name="hotelConfirmPassword" required><br>
+                </div>
+
+
+                <label for="stars"><b>Stars</b><br/?</label>
+                <select>
+  <option value="NULL">---</option>
+  <option value="1">1 star</option>
+  <option value="2">2 stars</option>
+  <option value="3">3 stars</option>
+  <option value="4">4 stars</option>
+  <option value="5">5 stars</option>
+</select>
+
+                <br>
+
+                <label for="location"><b>Location</b><br/</label>
+                <select>
+  <option value="NULL">---</option>
+  <option value="Alexandria">Alexandria</option>
+  <option value="Cairo">Cairo</option>
+  <option value="Fayuom">Fayoum</option>
+  <option value="NorthCoast">NorthCoast</option>
+  <option value="Siwa">Siwa</option>
+</select><br>
+
+                <label for="Facilities"><b>Facilities</b></label><br>
+                <div>
+                    <input type="checkbox" name="spa" value="true">Spa<br>
+                    <input type="checkbox" name="swimmingPool" value="true">Swimmingpool<br>
+                    <input type="checkbox" name="beach" value="true">Beach<br>
+                    <input type="checkbox" name="gym" value="true">GYM<br>
+
+                </div>
+
+
+
+
+            </form>
+
+        </body>
+
+    </html>
